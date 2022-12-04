@@ -3,6 +3,6 @@
 
 
 # Modules
-  -discord.js (npm i discord.js)
+  discord.js (npm i discord.js)
 
 
