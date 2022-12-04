@@ -1,5 +1,5 @@
 # Discord-Anilist-Bot
-  Discord bot that can lookup a anime by title.
+  Discord bot that can lookup an anime by title.
 
 
 # Modules
