@@ -7,4 +7,4 @@
 
 
 # Notice
-  THIS IS AN UNOFFICIAL BOT. This bot is not owned by or affiliated with anilist.co
+  This is an UNOFFICIAL Discord bot which is NOT owned by or affiliated with anilist.co
