@@ -149,7 +149,7 @@ function handleData(data){
 function handleError(error) {
     console.log('Error, check console');
     console.error(error);
-    //returns text to reply with on error
+    //returns text to reply with an error
     return 'Unknown Anime Name'
 }
 
