@@ -1,9 +1,9 @@
 # Discord-Anilist-Bot
-  Discord bot that can lookup an anime by title.
-
+  Discord bot that uses Anilist to look up character or anime details by name.
 
 # Modules
   discord.js (npm i discord.js)
+  fetch
   
 # API
   Anilist.co --> https://github.com/AniList/ApiV2-GraphQL-Docs
