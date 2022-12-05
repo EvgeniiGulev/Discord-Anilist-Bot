@@ -1,5 +1,4 @@
 //Anilist Query to get anime data
-//get next airing episode
 var query = `
 query ($search: String) {
     Media (search: $search, type: ANIME) {
@@ -141,7 +140,7 @@ function handleData(data){
         .setTimestamp()
         .setFooter({ text: 'Powered by Anilist.co', iconURL: 'https://anilist.co/img/icons/android-chrome-512x512.png' });
 
-    //Set animeEmbed as object then return object
+    //Sets animeEmbed as object then return object
     const embed = { embeds: [animeEmbed] }
     return embed
 }
