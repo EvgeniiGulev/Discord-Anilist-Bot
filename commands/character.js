@@ -102,7 +102,7 @@ function handleData(data){
         //Second Row
         .addFields(
             { name: 'Age', value: characterAge , inline: true },
-            { name: 'BirthDay', value: characterBirthDay , inline: true },
+            { name: 'Birthday', value: characterBirthDay , inline: true },
             { name: '\u200B', value: '\u200B' , inline: true },
         )
         //Third Row
