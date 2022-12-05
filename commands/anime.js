@@ -1,3 +1,6 @@
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const fetch = require('node-fetch');
+
 //Anilist Query to get anime data
 var query = `
 query ($search: String) {
@@ -66,7 +69,7 @@ async function fetchData(inputTitle){
                         .then(handleData)
                         .catch(handleError);
     //console.log(data)
-    return data
+    return data;
 }
 
 //Handle response
@@ -109,7 +112,6 @@ function handleData(data){
         }
 
     //Create embed with anime data
-    const { EmbedBuilder } = require('discord.js');
     const animeEmbed = new EmbedBuilder()
         .setThumbnail(animeCover)
         .setColor(0x0099FF)
@@ -142,18 +144,17 @@ function handleData(data){
 
     //Sets animeEmbed as object then return object
     const embed = { embeds: [animeEmbed] }
-    return embed
+    return embed;
 }
 //Handle errors
 function handleError(error) {
     console.log('Error Recieved, Check the error below:');
     console.error(error);
     //returns text to reply with an error
-    return 'Anime Not Found...'
+    return 'Anime Not Found...';
 }
 
 //Discord slash command
-const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('anime')
@@ -164,6 +165,6 @@ module.exports = {
 	async execute(interaction) {;
         const animeName = interaction.options.getString('name');
         fetchData(animeName)
-            .then(data => interaction.reply(data))
+            .then(data => interaction.reply(data));
 	},
 };
