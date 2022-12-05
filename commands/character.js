@@ -6,6 +6,7 @@
 //Modules
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 //Anilist Query to get anime character data
+//get media of character
 var query = `
 query ($search: String) {
     Character (search: $search) {
@@ -17,6 +18,12 @@ query ($search: String) {
         description
         siteUrl
         favourites
+        age
+        gender
+        dateOfBirth{
+            month
+            day
+        }
         image {
             large
             medium
@@ -69,7 +76,10 @@ function handleData(data){
           characterSite = character.siteUrl,
           characterImage = character.image.large,
           characterFavourites = '★' + JSON.stringify(character.favourites),
-          characterDescription = character.description.substring(0,1000);
+          characterAge = character.age,
+          characterGender = character.gender,
+          characterBirthDay = character.dateOfBirth.day + '/' + character.dateOfBirth.month,
+          characterDescription = character.description.substring(0,2000);
 
     //Create embed with character data
     const characterEmbed = new EmbedBuilder()
@@ -78,19 +88,29 @@ function handleData(data){
         .setTitle(characterName)
         .setURL(characterSite)
         .setDescription(characterDescription)
+        //Row Spacer
         .addFields(
-            //Row Spacer
             { name: '\u200B', value: '\u200B' , inline: true },
             { name: '\u200B', value: '\u200B' , inline: true },
             { name: '\u200B', value: '\u200B' , inline: true },
-            //First Row
         )
+        //First Row
         .addFields(
-            //Row Spacer
             { name: 'Favourites', value: characterFavourites , inline: true },
             { name: '\u200B', value: '\u200B' , inline: true },
             { name: '\u200B', value: '\u200B' , inline: true },
-            //First Row
+        )
+        //Second Row
+        .addFields(
+            { name: 'Age', value: characterAge , inline: true },
+            { name: 'BirthDay', value: characterBirthDay , inline: true },
+            { name: '\u200B', value: '\u200B' , inline: true },
+        )
+        //Third Row
+        .addFields(
+            { name: 'Gender', value: characterGender , inline: true },
+            { name: '\u200B', value: '\u200B' , inline: true },
+            { name: '\u200B', value: '\u200B' , inline: true },
         )
 
         .setTimestamp()
