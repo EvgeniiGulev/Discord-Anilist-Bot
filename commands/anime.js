@@ -45,8 +45,8 @@ query ($search: String) {
 
 async function fetchData(inputTitle){
     //Fetch the data
-    var url = 'https://graphql.anilist.co'
-    var options = {
+    const url = 'https://graphql.anilist.co'
+    const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,14 +82,14 @@ function handleResponse(response) {
 function handleData(data){
     //console.log('Data Recieved');
     //console.log(data);
-    var anime = data.data.Media;
-    var animeTitle = anime.title.romaji,
-        animeSite = anime.siteUrl,
-        animeDescription = anime.description,
-        animeAverage = anime.averageScore + '%',
-        animeMean = anime.meanScore + '%',
-        animeStartDate = anime.startDate.year + '/' + anime.startDate.month + '/' + anime.startDate.day,
-        animeCover = anime.coverImage.large;
+    const anime = data.data.Media;
+    const animeTitle = anime.title.romaji,
+          animeSite = anime.siteUrl,
+          animeDescription = anime.description,
+          animeAverage = anime.averageScore + '%',
+          animeMean = anime.meanScore + '%',
+          animeStartDate = anime.startDate.year + '/' + anime.startDate.month + '/' + anime.startDate.day,
+          animeCover = anime.coverImage.large;
         //Check if anime is ongoing
         if (anime.episodes == null) {
             animeEpisodes = JSON.stringify((anime.nextAiringEpisode.episode - 1));
@@ -149,6 +149,8 @@ function handleData(data){
 function handleError(error) {
     console.log('Error, check console');
     console.error(error);
+    //returns text to reply with on error
+    return 'Unknown Anime Name'
 }
 
 //Discord slash command
@@ -156,14 +158,13 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('anime')
-		.setDescription('Gets anime information by title.')
+		.setDescription('Gets anime information by name.')
         .addStringOption(option =>
-            option.setName('title')
-                .setDescription('Anime title.')),
+            option.setName('name')
+                .setDescription('Anime name.')),
 	async execute(interaction) {;
-        const inputTitle = interaction.options.getString('title');
-        fetchData(inputTitle)
+        const animeName = interaction.options.getString('name');
+        fetchData(animeName)
             .then(data => interaction.reply(data))
-        //await interaction.reply(inputTitle) 
 	},
 };
