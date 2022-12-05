@@ -6,7 +6,6 @@
 //Modules
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 //Anilist Query to get anime character data
-//get media of character
 var query = `
 query ($search: String) {
     Character (search: $search) {
