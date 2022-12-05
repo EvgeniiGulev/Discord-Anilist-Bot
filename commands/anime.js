@@ -1,3 +1,9 @@
+/**
+* Author: Evgenii Gulev
+* Date: 05/12/2022
+* Description: Get anime data by anime name with anilist.co api, then send an embed with some data to user 
+*/
+//Modules
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 //Anilist Query to get anime data
@@ -68,7 +74,7 @@ async function fetchData(inputTitle){
                         .then(handleData)
                         .catch(handleError);
     //console.log(data)
-    return data;
+    return data
 }
 
 //Handle response
@@ -141,19 +147,19 @@ function handleData(data){
         .setTimestamp()
         .setFooter({ text: 'Powered by Anilist.co', iconURL: 'https://anilist.co/img/icons/android-chrome-512x512.png' });
 
-    //Sets animeEmbed as object then return object
+    //Set animeEmbed as object then return object
     const embed = { embeds: [animeEmbed] }
-    return embed;
+    return embed
 }
 //Handle errors
 function handleError(error) {
     console.log('Error Recieved, Check the error below:');
     console.error(error);
     //returns text to reply with an error
-    return 'Anime Not Found...';
+    return 'Anime Not Found...'
 }
 
-//Discord slash command
+//Discord slash command for anime
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('anime')
@@ -161,9 +167,9 @@ module.exports = {
         .addStringOption(option =>
             option.setName('name')
                 .setDescription('Anime name.')),
-	async execute(interaction) {;
+	async execute(interaction) {
         const animeName = interaction.options.getString('name');
         fetchData(animeName)
-            .then(data => interaction.reply(data));
+            .then(data => interaction.reply(data))
 	},
 };
