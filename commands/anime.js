@@ -147,10 +147,10 @@ function handleData(data){
 }
 //Handle errors
 function handleError(error) {
-    console.log('Error, check console');
+    console.log('Error Recieved, Check the error below:');
     console.error(error);
     //returns text to reply with an error
-    return 'Anime Not Found..'
+    return 'Anime Not Found...'
 }
 
 //Discord slash command
